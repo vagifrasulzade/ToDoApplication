@@ -77,12 +77,12 @@ public class ToDoService : IToDoService
         if (from.HasValue)
         {
 
-            query = query.Where(item => item.CreatedAt >= from.Value);
+            query = query.Where(item => item.CreatedAt >= from);
             
         }
         if (to.HasValue)
         {
-            query = query.Where(item => item.CreatedAt <= to.Value);
+            query = query.Where(item => item.CreatedAt <= to);
         }
 
 
