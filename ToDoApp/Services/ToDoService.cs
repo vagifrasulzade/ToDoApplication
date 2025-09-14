@@ -9,7 +9,7 @@ namespace ToDoApp.Services;
 public class ToDoService : IToDoService
 {
     private readonly AppDbContext _context;
-
+    
     public ToDoService(AppDbContext context)
     {
         _context = context;
@@ -92,6 +92,7 @@ public class ToDoService : IToDoService
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
+
 
         return new PaginationListDTO<ToDoItemDTO>(
             items.Select(item => ConvertToDoItemDTO(item)),

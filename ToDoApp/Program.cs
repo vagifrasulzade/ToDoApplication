@@ -1,20 +1,40 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ToDoApp;
+using ToDoApp.Auth;
 using ToDoApp.Data;
+using ToDoApp.Models;
 using ToDoApp.Services;
+using ToDoApp.Services.Auth;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IJwtService, JwtService>();
+
+var jwtConfig = new JwtConfig();
+builder.Configuration.Bind("JWT", jwtConfig);
+builder.Services.AddSingleton(jwtConfig);
+
+
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+
+
+builder.Services.AuthenticationAndAuthorization(builder.Configuration);
+builder.Services.AddSwagger();
+
+
 
 builder.Services.AddScoped<IToDoService, ToDoService>();
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("default"));
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("TODO_DBContext"));
 });
 
 var app = builder.Build();
@@ -23,8 +43,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(x=>x.EnablePersistAuthorization());
 }
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

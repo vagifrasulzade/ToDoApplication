@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LOQ\\Desktop\\ToDoApp - Pagination\\ToDoApp\\ToDoApp\\ToDoApp.csproj": {}
+    "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\ToDoApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LOQ\\Desktop\\ToDoApp - Pagination\\ToDoApp\\ToDoApp\\ToDoApp.csproj": {
+    "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\ToDoApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LOQ\\Desktop\\ToDoApp - Pagination\\ToDoApp\\ToDoApp\\ToDoApp.csproj",
+        "projectUniqueName": "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\ToDoApp.csproj",
         "projectName": "ToDoApp",
-        "projectPath": "C:\\Users\\LOQ\\Desktop\\ToDoApp - Pagination\\ToDoApp\\ToDoApp\\ToDoApp.csproj",
+        "projectPath": "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\ToDoApp.csproj",
         "packagesPath": "C:\\Users\\LOQ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LOQ\\Desktop\\ToDoApp - Pagination\\ToDoApp\\ToDoApp\\obj\\",
+        "outputPath": "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,9 +51,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.19, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.20, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -64,6 +68,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.19, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[8.0.20, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -93,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
