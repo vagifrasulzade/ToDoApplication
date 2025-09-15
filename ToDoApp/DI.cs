@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using ToDoApp.Auth;
+using ToDoApp.Data;
 using ToDoApp.DTOs.Auth;
+using ToDoApp.Models;
+using ToDoApp.Providers;
+using ToDoApp.Services.Auth;
 
 namespace ToDoApp;
 
@@ -63,11 +68,19 @@ public  static class DI
     public static IServiceCollection AuthenticationAndAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
         //Authentication
+        services.AddIdentity<AppUser, IdentityRole>(setup =>
+        {
+            setup.Password.RequireNonAlphanumeric = false;
+        }).AddEntityFrameworkStores<AppDbContext>();
+        
+        
+        services.AddScoped<IJwtService, JwtService>();
 
-        var jwtConfig = configuration.GetSection("Jwt").Get<JwtConfig>();
-        if (jwtConfig is null)
-            throw new Exception("Jwt settings not found in configuration!");
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Secret));
+        services.AddScoped<IRequestUserProvider, RequestUserProvider>();
+
+        var jwtConfig = new JwtConfig();
+        configuration.Bind("JWT", jwtConfig);
+        services.AddSingleton(jwtConfig);
         services.AddAuthentication("Bearer")
             .AddJwtBearer(options =>
             {
@@ -80,7 +93,7 @@ public  static class DI
                     ClockSkew = TimeSpan.Zero,
                     ValidIssuer = jwtConfig.Issuer,
                     ValidAudience = jwtConfig.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("ElektrikleshdirebildiklerimizdensinizmiElektrikleshdirebildiklerimizdensinizmi"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-very-secure-and-long-secret-key-of-32-bytes-or-more"))
                 };
             });
 
@@ -109,8 +122,8 @@ public  static class DI
                 });
             });
 
-        services.AddSingleton<IAuthorizationHandler, CanTestRequirment>();
-        services.AddSingleton<IAuthorizationHandler, CanCreateRequirment>();
+        //services.AddSingleton<IAuthorizationHandler, CanTestRequirment>();
+        //services.AddSingleton<IAuthorizationHandler, CanCreateRequirment>();
         return services;
     }
 

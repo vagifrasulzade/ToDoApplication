@@ -7926,23 +7926,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LOQ\\.nuget\\packages\\": {},
+    "C:\\Users\\Rasul_zq69\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\ToDoApp.csproj",
+      "projectUniqueName": "C:\\Users\\Rasul_zq69\\Desktop\\ToDo\\ToDoApp\\ToDoApp.csproj",
       "projectName": "ToDoApp",
-      "projectPath": "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\ToDoApp.csproj",
-      "packagesPath": "C:\\Users\\LOQ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LOQ\\Desktop\\ToDo\\ToDoApp\\ToDoApp\\obj\\",
+      "projectPath": "C:\\Users\\Rasul_zq69\\Desktop\\ToDo\\ToDoApp\\ToDoApp.csproj",
+      "packagesPath": "C:\\Users\\Rasul_zq69\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rasul_zq69\\Desktop\\ToDo\\ToDoApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\LOQ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Rasul_zq69\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7970,7 +7970,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -8026,7 +8026,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -24,7 +24,7 @@
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:ToDoApp.Controllers.ToDoController.#ctor(ToDoApp.Services.IToDoService)">
+        <member name="M:ToDoApp.Controllers.ToDoController.#ctor(ToDoApp.Services.IToDoService,ToDoApp.Providers.IRequestUserProvider)">
             <summary>
             
             </summary>
@@ -142,6 +142,18 @@
         <member name="M:ToDoApp.Migrations.IdentityAdd.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:ToDoApp.Migrations.IdentityMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoApp.Migrations.IdentityMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoApp.Migrations.IdentityMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ToDoApp.Migrations.IdentityMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:ToDoApp.Models.AppUser">
             <summary>
             
@@ -151,6 +163,44 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:ToDoApp.Providers.IRequestUserProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ToDoApp.Providers.IRequestUserProvider.GetUserInfo">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ToDoApp.Providers.RequestUserProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ToDoApp.Providers.UserInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ToDoApp.Providers.UserInfo.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ToDoApp.Providers.UserInfo.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ToDoApp.Providers.UserInfo.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="userName"></param>
         </member>
     </members>
 </doc>

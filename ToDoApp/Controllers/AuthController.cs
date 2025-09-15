@@ -18,9 +18,12 @@ public class AuthController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
-    private readonly JwtService _jwtService;
+    private readonly IJwtService _jwtService;
 
-    public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signManager, JwtService jwtService)
+    public AuthController(
+        UserManager<AppUser> userManager, 
+        SignInManager<AppUser> signManager,
+        IJwtService jwtService)
     {
         _userManager = userManager;
         _signInManager = signManager;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDoApp.DTOs;
 using ToDoApp.DTOs.Pagination;
+using ToDoApp.Providers;
 using ToDoApp.Services;
 
 namespace ToDoApp.Controllers;
@@ -11,13 +12,16 @@ namespace ToDoApp.Controllers;
 public class ToDoController : ControllerBase
 {
     private readonly IToDoService _service;
+    private readonly IRequestUserProvider _userProvider;
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="service"></param>
-    public ToDoController(IToDoService service)
+    public ToDoController(IToDoService service, IRequestUserProvider userProvider)
     {
         _service = service;
+        _userProvider = userProvider;
     }
     /// <summary>
     /// 
@@ -34,7 +38,10 @@ public class ToDoController : ControllerBase
         [FromQuery] ToDoQueryFilters queryFilters
         )
     {
+        var user = _userProvider.GetUserInfo();
+
         return await _service.GetToDoItemsAsync(
+            user.Id,
             request.Page,
             request.PageSize,
             queryFilters.Search,
@@ -49,9 +56,11 @@ public class ToDoController : ControllerBase
     /// <returns></returns>
 
     [HttpGet("{id}")]
+   
     public async Task<ActionResult<ToDoItemDTO>> Get(int id)
     {
-        var item = await _service.GetToDoItemAsync(id);
+        var user = _userProvider.GetUserInfo();
+        var item = await _service.GetToDoItemAsync(user.Id,id);
         return item is not null ? item : NotFound();
     }
     /// <summary>
@@ -65,7 +74,8 @@ public class ToDoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ToDoItemDTO>> Post([FromBody] ToDoItemCreateDTO request)
     {
-        return await _service.CreateToDoAsync(request);
+        var user = _userProvider.GetUserInfo();
+        return await _service.CreateToDoAsync(user.Id,request);
     }
     /// <summary>
     /// Change ToDo Item 
@@ -77,7 +87,8 @@ public class ToDoController : ControllerBase
     [HttpPatch("{id}/status")]
     public async Task<ActionResult<ToDoItemDTO>> Patch(int id, [FromBody] bool isCompleted)
     {
-        var todoItem = await _service.ChangeToDoItemStatusAsync(id, isCompleted);
+        var user = _userProvider.GetUserInfo();
+        var todoItem = await _service.ChangeToDoItemStatusAsync(user.Id,id, isCompleted);
 
         return todoItem is not null ? todoItem : NotFound();
     }

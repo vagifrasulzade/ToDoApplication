@@ -15,15 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<IJwtService, JwtService>();
-
-var jwtConfig = new JwtConfig();
-builder.Configuration.Bind("JWT", jwtConfig);
-builder.Services.AddSingleton(jwtConfig);
 
 
-builder.Services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(setup =>
+{
+    setup.Password.RequireNonAlphanumeric = false;
+}).AddEntityFrameworkStores<AppDbContext>();
 
 
 builder.Services.AuthenticationAndAuthorization(builder.Configuration);
@@ -32,6 +30,7 @@ builder.Services.AddSwagger();
 
 
 builder.Services.AddScoped<IToDoService, ToDoService>();
+
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("TODO_DBContext"));
@@ -43,7 +42,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(x=>x.EnablePersistAuthorization());
+    app.UseSwaggerUI(x => x.EnablePersistAuthorization());
 }
 
 app.UseAuthentication();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
 
-namespace ToDoApp.DTOs.Auth;
+namespace ToDoApp.Auth;
 
 public class CanTestRequirment
     : IAuthorizationRequirement, IAuthorizationHandler
