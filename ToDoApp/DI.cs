@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -28,7 +30,10 @@ public  static class DI
                     Title = "ToDo",
                     Version = "v 2.0",
                 });
-            setup.IncludeXmlComments(@"obj\Debug\net8.0\ToDoApp.xml");
+           
+                var filePath = Path.Combine(AppContext.BaseDirectory, "Documentation.xml");
+                setup.IncludeXmlComments(filePath);
+            
             setup.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
                 Name = "Authorization",
@@ -70,6 +75,10 @@ public  static class DI
         //Authentication
         services.AddIdentity<AppUser, IdentityRole>(setup =>
         {
+            setup.Password.RequiredLength = 8;
+            setup.Password.RequireDigit = false;
+            setup.Password.RequireLowercase = false;
+            setup.Password.RequireUppercase = false;
             setup.Password.RequireNonAlphanumeric = false;
         }).AddEntityFrameworkStores<AppDbContext>();
         
@@ -81,6 +90,14 @@ public  static class DI
         var jwtConfig = new JwtConfig();
         configuration.Bind("JWT", jwtConfig);
         services.AddSingleton(jwtConfig);
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        });
+
         services.AddAuthentication("Bearer")
             .AddJwtBearer(options =>
             {
@@ -106,24 +123,13 @@ public  static class DI
                     policy.RequireAuthenticatedUser();
                     //policy.RequireClaim("CanTest");
                     policy.Requirements.Add(new CanTestRequirment());
-                });
-                options.AddPolicy("CanCreate", policy =>
-                {
-                    policy.RequireAuthenticatedUser();
-                    //policy.RequireClaim("CanTest");
                     policy.Requirements.Add(new CanCreateRequirment());
+
                 });
-                options.AddPolicy("SomeRequirment", policy =>
-                {
-                    policy.RequireAuthenticatedUser();
-                    //policy.RequireClaim("CanTest");
-                    policy.Requirements.Add(new CanTestRequirment());
-                    policy.Requirements.Add(new CanCreateRequirment());
-                });
+               
             });
 
-        //services.AddSingleton<IAuthorizationHandler, CanTestRequirment>();
-        //services.AddSingleton<IAuthorizationHandler, CanCreateRequirment>();
+       
         return services;
     }
 

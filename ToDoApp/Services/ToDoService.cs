@@ -58,7 +58,7 @@ public class ToDoService : IToDoService
     {
         var item = _context.ToDoItems.FirstOrDefault(t => t.Id == id && t.UserId == userId);
 
-        return item is null ? ConvertToDoItemDTO(item!) : null!;
+        return item is not null ? ConvertToDoItemDTO(item!) : null!;
     }
 
     

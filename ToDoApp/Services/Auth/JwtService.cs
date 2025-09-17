@@ -24,7 +24,8 @@ public class JwtService : IJwtService
         var claims = new List<Claim>
         {
             new Claim(ClaimsIdentity.DefaultNameClaimType, email),
-            new Claim(ClaimsIdentity.DefaultRoleClaimType, string.Join(",", roles))
+            new Claim(ClaimsIdentity.DefaultRoleClaimType, string.Join(",", roles)),
+            new Claim("userId", id)
         }.Concat(userClaims);
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Secret));

@@ -17,13 +17,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 
-
-builder.Services.AddIdentity<AppUser, IdentityRole>(setup =>
-{
-    setup.Password.RequireNonAlphanumeric = false;
-}).AddEntityFrameworkStores<AppDbContext>();
-
-
 builder.Services.AuthenticationAndAuthorization(builder.Configuration);
 builder.Services.AddSwagger();
 
@@ -35,6 +28,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("TODO_DBContext"));
 });
+
 
 var app = builder.Build();
 

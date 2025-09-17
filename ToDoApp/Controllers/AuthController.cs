@@ -52,7 +52,7 @@ public class AuthController : ControllerBase
         {
             new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email!),
             new Claim(ClaimsIdentity.DefaultRoleClaimType, string.Join(",", roles)),
-
+            new Claim("userId", user.Id)
             
         }.Concat(userClaims);
 

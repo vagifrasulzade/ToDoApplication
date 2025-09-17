@@ -41,7 +41,7 @@ public class ToDoController : ControllerBase
         var user = _userProvider.GetUserInfo();
 
         return await _service.GetToDoItemsAsync(
-            user.Id,
+            user!.Id,
             request.Page,
             request.PageSize,
             queryFilters.Search,
@@ -75,7 +75,7 @@ public class ToDoController : ControllerBase
     public async Task<ActionResult<ToDoItemDTO>> Post([FromBody] ToDoItemCreateDTO request)
     {
         var user = _userProvider.GetUserInfo();
-        return await _service.CreateToDoAsync(user.Id,request);
+        return await _service.CreateToDoAsync(user.Id, request);
     }
     /// <summary>
     /// Change ToDo Item 
